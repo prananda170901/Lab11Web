@@ -20,3 +20,9 @@
 <br>> php-xml ekstension untuk bekerja dengan XML;
 <br>> php-intl ekstensi untuk membuat aplikasi multibahasa;
 <br>> libcurl (opsional), jika ingin pakai curl
+
+<br>Untuk mengaktifkan ekstentsi tersebut, melalu XAMPP Control Panel, pada bagian
+Apache klik Config -> PHP.ini
+![p](img/SS1.png)
+<br>Pada bagian extention, hilangkan tanda ; (titik koma) pada ekstensi yang akan
+diaktifkan. Kemudian simpan kembali filenya dan restart Apache web server.
