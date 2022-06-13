@@ -76,3 +76,8 @@ pada environment variable CI_ENVIRINMENT menjadi development.
 <br>• tests folder ini berisi kode untuk melakukan testing dengna PHPunit;
 <br>• vendor folder ini berisi library yang dibutuhkan oleh aplikasi, isinya juga termasuk kode core dari system CI.
 <br>• writable folder ini berisi file yang ditulis oleh aplikasi. Nantinya, kita bisa pakai untuk menyimpan file yang di-upload, logs, session, dll.
+
+<br>Sedangkan file - file yang berada pada root direktori CI sebagai Berikut
+<br>.env adalah file yang berisi variable environment yang dibutuhkan oleh aplikasi.
+<br>.gitignore adalah file yang berisi daftar nama file dan folder yang akan diabaikan oleh git.
+<br>build adalah script untuk mengubah versi codeigniter yang digunakan ada versi release (stabil) dan development (labil).
