@@ -50,3 +50,14 @@ php spark
 ```
 
 ![p](img/SS5.png)
+
+## Mengaktifkan Mode Debugging
+
+<br>Codeigniter 4 menyediakan fitur debugging untuk memudahkan developer untuk
+mengetahui pesan error apabila terjadi kesalahan dalam membuat kode program.
+<br>Secara default fitur ini belum aktif. Ketika terjadi error pada aplikasi akan ditampilkan
+pesan kesalahan seperti berikut.
+![p](img/SS6.png)
+<br>Semua jenis error akan ditampilkan sama. Untuk memudahkan mengetahui jenis 
+errornya, maka perlu diaktifkan mode debugging dengan mengubah nilai konfigurasi 
+pada environment variable CI_ENVIRINMENT menjadi development.
