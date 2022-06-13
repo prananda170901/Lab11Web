@@ -58,6 +58,10 @@ mengetahui pesan error apabila terjadi kesalahan dalam membuat kode program.
 <br>Secara default fitur ini belum aktif. Ketika terjadi error pada aplikasi akan ditampilkan
 pesan kesalahan seperti berikut.
 ![p](img/SS6.png)
-<br>Semua jenis error akan ditampilkan sama. Untuk memudahkan mengetahui jenis 
-errornya, maka perlu diaktifkan mode debugging dengan mengubah nilai konfigurasi 
+<br>Semua jenis error akan ditampilkan sama. Untuk memudahkan mengetahui jenis
+errornya, maka perlu diaktifkan mode debugging dengan mengubah nilai konfigurasi
 pada environment variable CI_ENVIRINMENT menjadi development.
+![p](img/SS7.png)
+<br>Ubah nama file env menjadi .env kemudian buka file tersebut dan ubah nilai variable CI_ENVIRINMENT menjadi development.
+<br>Contoh error yang terjadi. Untuk mencoba error tersebut, ubah kode pada file app/Controller/Home.php hilangkan titik koma pada akhir kode.
+![p](img/SS8.png)
