@@ -65,3 +65,14 @@ pada environment variable CI_ENVIRINMENT menjadi development.
 <br>Ubah nama file env menjadi .env kemudian buka file tersebut dan ubah nilai variable CI_ENVIRINMENT menjadi development.
 <br>Contoh error yang terjadi. Untuk mencoba error tersebut, ubah kode pada file app/Controller/Home.php hilangkan titik koma pada akhir kode.
 ![p](img/SS8.png)
+
+## Struktur Direktori
+
+<br>Untuk lebih memahami Framework Codeigniter 4 perlu mengetahui struktur direktori dan file yang ada. Buka pada Windows Explorer atau dari Visual Studio Code -> Open Folder.
+<br> Terdapat beberapa direktori dan file yang perlu dipahami fungsi dan kegunaannya.
+<br>• .github folder ini kita butuhkan untuk konfigurasi repo github, seperti konfigurasi untuk build dengan github action;
+<br>• app folder ini akan berisi kode dari aplikasi yang kita kembangkan;
+<br>• public folder ini berisi file yang bisa diakses oleh publik, seperti file index.php, robots.txt, favicon.ico, ads.txt, dll;
+<br>• tests folder ini berisi kode untuk melakukan testing dengna PHPunit;
+<br>• vendor folder ini berisi library yang dibutuhkan oleh aplikasi, isinya juga termasuk kode core dari system CI.
+<br>• writable folder ini berisi file yang ditulis oleh aplikasi. Nantinya, kita bisa pakai untuk menyimpan file yang di-upload, logs, session, dll.
