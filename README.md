@@ -125,3 +125,48 @@ php spark routes
 <br>Ketika diakses akan mucul tampilan error 404 file not found, itu artinya file/page tersebut tidak ada. Untuk dapat mengakses halaman tersebut, harus dibuat terlebih dahulu Contoller yang sesuai dengan routing yang dibuat yaitu Contoller Page.
 
 ## Membuat Controller
+
+<br>Selanjutnya adalah membuat Controller Page. Buat file baru dengan nama page.php
+pada direktori Controller kemudian isi kodenya seperti berikut.
+
+```
+<?php
+namespace App\Controllers;
+class Page extends BaseController
+{
+ public function about()
+ {
+ echo "Ini halaman About";
+ }
+ public function contact()
+ {
+ echo "Ini halaman Contact";
+ }
+ public function faqs()
+ {
+ echo "Ini halaman FAQ";
+ }
+}
+```
+
+<br>Selanjutnya refresh Kembali browser,
+![p](img/SS13.png)
+
+## Auto Routing
+
+<br>Secara default fitur autoroute pada Codeiginiter sudah aktif. Untuk mengubah status autoroute dapat mengubah nilai variabelnya. Untuk menonaktifkan ubah nilai true menjadi false.
+
+```
+$routes->setAutoRoute(true);
+```
+
+<br>Tambahkan method baru pada Controller Page Seperti berikut.
+
+```
+public function tos()
+{
+ echo "ini halaman Term of Services";
+}
+```
+<br>Method ini belum ada pada routing, sehingga cara mengaksesnya dengan menggunakan alamat: http://localhost:8080/page/tos
+![p](img/SS14.png)
