@@ -81,3 +81,47 @@ pada environment variable CI_ENVIRINMENT menjadi development.
 <br>•.env adalah file yang berisi variable environment yang dibutuhkan oleh aplikasi.
 <br>•.gitignore adalah file yang berisi daftar nama file dan folder yang akan diabaikan oleh git.
 <br>•build adalah script untuk mengubah versi codeigniter yang digunakan ada versi release (stabil) dan development (labil).
+<br>• composer.json adalah file JSON yang berisi informasi tentang proyek dan daftar library yang dibutuhkannya. File ini digunakan oleh Composer sebagai acuan.
+<br>• composer.lock adalah file yang berisi informasi versi dari libraray yang digunakan aplikasi.
+<br>• license.txt adalah file yang berisi penjelasan tentang lisensi Codeigniter;
+<br>• phpunit.xml.dist adalah file XML yang berisi konfigurasi untuk PHPunit.
+<br>• README.md adalah file keterangan tentang codebase CI. Ini biasanya akan dibutuhkan pada repo github atau gitlab.
+<br>• spark adalah program atau script yang berfungsi untuk menjalankan server, generate kode, dll.
+![p](img/SS9.png)
+<br>Fokus kita pada folder app, dimana folder tersebut adalah area kerja kita untuk membuat aplikasi. dan folder public untuk menyimpan aset web seperti css, gambar, javascript, dll.
+
+## Memahami Konsep MVC
+
+<br>Pada Codeigniter, request yang diterima oleh file index.php akan diarahkan ke Router untuk meudian oleh router tesebut diarahkan ke Controller.
+<br>Router terletak pada file app/config/Routes.php
+![p](img/SS10.png)
+<br>Pada file tersebut kita dapat mendefinisikan route untuk aplikasi yang kita buat, Contoh :
+
+```
+$routes->get('/', 'Home::index');
+```
+
+<br>Kode tersebut akan mengarahkan rute untuk halaman home
+
+## Membuat Route baru.
+
+<br>Tambahkan kode berikut di dalam Routes.php
+
+```
+$routes->get('/about', 'Page::about');
+$routes->get('/contact', 'Page::contact');
+$routes->get('/faqs', 'Page::faqs');
+```
+
+<br>Untuk mengetahui route yang ditambahkan sudah benar, buka CLI dan jalankan perintah berikut.
+
+```
+php spark routes
+```
+
+![p](img/SS11.png)
+<br>Selanjutnya coba akses route yang telah dibuat dengan mengakses alamat url http://localhost:8080/about
+![p](img/SS12.png)
+<br>Ketika diakses akan mucul tampilan error 404 file not found, itu artinya file/page tersebut tidak ada. Untuk dapat mengakses halaman tersebut, harus dibuat terlebih dahulu Contoller yang sesuai dengan routing yang dibuat yaitu Contoller Page.
+
+## Membuat Controller
