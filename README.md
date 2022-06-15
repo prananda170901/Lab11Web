@@ -168,5 +168,113 @@ public function tos()
  echo "ini halaman Term of Services";
 }
 ```
+
 <br>Method ini belum ada pada routing, sehingga cara mengaksesnya dengan menggunakan alamat: http://localhost:8080/page/tos
 ![p](img/SS14.png)
+
+## Membuat View
+
+<br>Selanjutnya adalah membuat view untuk tampilan web agar lebih menarik, Buat file baru dengan nama about.php pada direktori view (app/view/about.php)kemudian isi kodenya seperti berikut.
+
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title><?= $title; ?></title>
+</head>
+<body>
+ <h1><?= $title; ?></h1>
+ <hr>
+ <p><?= $content; ?></p>
+</body>
+</html>
+```
+
+<br>Ubah method about pada class Controlleer Page menjadi seperti berikut:
+
+```
+public function about()
+{
+ return view('about', [
+ 'title' => 'Halaman Abot',
+ 'content' => 'Ini adalah halaman abaut yang menjelaskan tentang isi
+halaman ini.'
+ ]);
+}
+```
+
+<br>Kemudian lakukan refresh pada halaman tersebut.
+![p](img/SS15.png)
+
+## Membuat Layout Web dengan CSS
+
+<br>Pada dasarnya layout web dengan css dapat diimplamentasikan dengan mudah pada codeigniter. Yang perlu diketahui adalah, pada Codeigniter 4 file yang menyimpan asset css dan javascript terletak pada direktori public.
+<br>Buat file css pada direktori public dengan nama style.css (copy file dari praktikumlab4_layout. Kita akan gunakan layout yang pernah dibuat pada praktikum 4.
+![p](img/SS16.png)
+<br>Kemudian buat folder template pada direktori view kemudian buat file header.php dan footer.php
+<br>File app/view/template/header.php
+
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title><?= $title; ?></title>
+ <link rel="stylesheet" href="<?= base_url('/style.css');?>">
+</head>
+<body>
+ <div id="container">
+ <header>
+ <h1>Layout Sederhana</h1>
+ </header>
+ <nav>
+ <a href="<?= base_url('/');?>" class="active">Home</a>
+ <a href="<?= base_url('/artikel');?>">Artikel</a>
+ <a href="<?= base_url('/about');?>">About</a>
+ <a href="<?= base_url('/contact');?>">Kontak</a>
+ </nav>
+ <section id="wrapper">
+ <section id="main">
+```
+
+<br>File app/view/template/footer.php
+
+```
+</section>
+ <aside id="sidebar">
+<div class="widget-box">
+ <h3 class="title">Widget Header</h3>
+ <ul>
+ <li><a href="#">Widget Link</a></li>
+ <li><a href="#">Widget Link</a></li>
+ </ul>
+ </div>
+ <div class="widget-box">
+ <h3 class="title">Widget Text</h3>
+ <p>Vestibulum lorem elit, iaculis in nisl volutpat, malesuada
+tincidunt arcu. Proin in leo fringilla, vestibulum mi porta, faucibus felis.
+Integer pharetra est nunc, nec pretium nunc pretium ac.</p>
+ </div>
+ </aside>
+ </section>
+ <footer>
+ <p>&copy; 2021 - Universitas Pelita Bangsa</p>
+ </footer>
+ </div>
+</body>
+</html>
+```
+
+<br>Kemudian ubah file app/view/about.php seperti berikut.
+
+```
+<?= $this->include('template/header'); ?>
+<h1><?= $title; ?></h1>
+<hr>
+<p><?= $content; ?></p>
+<?= $this->include('template/footer'); ?>
+```
+
+<br>Selanjutnya refresh tampilan pada alamat http://localhost:8080/about
+![p](img/SS17.png)
