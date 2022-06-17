@@ -278,3 +278,11 @@ Integer pharetra est nunc, nec pretium nunc pretium ac.</p>
 
 <br>Selanjutnya refresh tampilan pada alamat http://localhost:8080/about
 ![p](img/SS17.png)
+
+# Praktikum 12
+
+# langkah - langkah Praktikum
+
+## Persiapan
+
+<>
