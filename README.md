@@ -285,4 +285,24 @@ Integer pharetra est nunc, nec pretium nunc pretium ac.</p>
 
 ## Persiapan
 
-<>
+<br>Untuk memulai membuat database aplikasi CRUD sederhana, yang perlu disiapkan adalah database server menggunakan MySQL Server sudah dapat di jalankan melalui XAMPP.
+
+## Membuat Database
+```
+CREATE DATABASE lab_ci4;
+```
+![p](img/SS18.png)
+
+## Membuat Tabel
+```
+CREATE TABLE artikel (
+ id INT(11) auto_increment,
+ judul VARCHAR(200) NOT NULL,
+ isi TEXT,
+ gambar VARCHAR(200),
+ status TINYINT(1) DEFAULT 0,
+ slug VARCHAR(200),
+ PRIMARY KEY(id)
+);
+```
+![p](img/SS19.png)
