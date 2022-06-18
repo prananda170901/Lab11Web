@@ -711,3 +711,14 @@ class User extends BaseController
 </html>
 ```
 
+## Membuat Database Seeder
+<br>Database seeder digunakan untuk membuat data dummy. Untuk keperluan ujicoba modul login, kita perlu memasukkan data user dan password kedaalam database. Untuk itu buat database seeder untuk tabel user. Buka CLI, kemudian tulis perintah berikut:
+```
+php spark make:seeder UserSeeder
+```
+
+Selanjutnya buka kembali CLI dan ketikan perintah berikut :
+```
+php spark db:seed UserSeeder
+```
+
