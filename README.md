@@ -722,3 +722,7 @@ Selanjutnya buka kembali CLI dan ketikan perintah berikut :
 php spark db:seed UserSeeder
 ```
 
+## Uji Coba Login
+Selanjutnya buka url `http://localhost:8080/user/login` seperti berikut :
+
+![p](img/SS27.png)
