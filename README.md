@@ -602,3 +602,17 @@ CREATE TABLE user (
 );
 ```
 
+## Membuat Model User
+<br> Selanjutnya membuat model user untuk memproses data login. Buat file baru pada direktori **app/Models** dengan nama **UserModel.php**
+```php
+<?php
+namespace App\Models;
+use CodeIgniter\Model;
+class UserModel extends Model
+{
+    protected $table = 'user';
+    protected $primaryKey = 'id';
+    protected $useAutoIncrement = true;
+    protected $allowedFields = ['username', 'useremail', 'userpassword'];
+}
+```
