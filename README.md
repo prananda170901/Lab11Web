@@ -585,3 +585,20 @@ Untuk menghapus artikel bisa dengan mengklik tombol **Hapus** pada menu admin.
 ---
 
 # Praktikum 13 Framework Lanjutan (Modul Login)
+
+# Langkah - Langkah Praktikum
+
+## Persiapan
+<br>Untuk membuat modul login, yang perlu disiapkan adalah database server menggunakan MySQL. Pastikan MySQL Server sudah dapat dijalankan melalui XAMPP
+
+## Membuat Tabel : User Login
+```php
+CREATE TABLE user (
+  id INT(11) auto_increment,
+  username VARCHAR(200) NOT NULL,
+  useremail VARCHAR(200),
+  userpassword VARCHAR(200),
+  PRIMARY KEY(id) 
+);
+```
+
