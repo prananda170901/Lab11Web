@@ -724,6 +724,9 @@ php spark db:seed UserSeeder
 
 ## Uji Coba Login
 Selanjutnya buka url `http://localhost:8080/user/login` seperti berikut :
+Username = admin
+Email = admin@email.com
+Password = admin123
 
 ![p](img/SS27.png)
 
@@ -748,4 +751,24 @@ class Auth implements FilterInterface
         // Do something here 
     } 
 }
-``
+```
+
+Selannjutnya buka file **app/Config/Filters.php** tambahkan kode berikut :
+```
+'auth'          => App\Filters\Auth::class;
+```
+
+Selanjutnya buka file **app/Config/Routes** dan sesuaikan kodenya.
+
+![p](img/SS28.png)
+
+## Percobaan Akses Menu Admin
+<br>Buka url dengan alamat `http://localhost:8080/admin/artikel` ketika alamat tersebut diakses maka, akan dimuculkan halaman login.
+
+![p]()
+
+## Fungsi Logout
+<br>Tambahkan methode logout pada **Controller/User** seperti berikut :
+```php
+
+```
