@@ -773,10 +773,15 @@ Selanjutnya buka file **app/Config/Routes** dan sesuaikan kodenya.
 ## Percobaan Akses Menu Admin
 <br>Buka url dengan alamat `http://localhost:8080/admin/artikel` ketika alamat tersebut diakses maka, akan dimuculkan halaman login.
 
-![p]()
+![p](img/SS31.png)
 
 ## Fungsi Logout
 <br>Tambahkan methode logout pada **Controller/User** seperti berikut :
 ```php
-
+public function logout() 
+    {
+        session()->destroy();
+        return redirect()->to('/user/login');
+    }
 ```
+
