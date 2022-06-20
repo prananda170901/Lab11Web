@@ -738,29 +738,33 @@ Password = admin123
 <br>Selanjutnya membuat filter untuk halaman admin. Buat file baru dengan nama **Auth.php** pada direktori **app/Filters**.
 ```php
 <?php namespace App\Filters;
+
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\Filters\FilterInterface;
+
 class Auth implements FilterInterface
 {
     public function before(RequestInterface $request, $arguments = null)
-    { 
+    {
         // jika user belum login
         if(! session()->get('logged_in')){
             // maka redirct ke halaman login
-            return redirect()->to('/user/login'); 
-        } 
-    } 
-    public function after(RequestInterface $request, ResponseInterface $response, $arguments = null) { 
-        // Do something here 
-    } 
+            return redirect()->to('/user/login');
+        }
+    }
+
+    public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
+    {
+        // Do something here
+    }
 }
+
 ```
 
-Selannjutnya buka file **app/Config/Filters.php** tambahkan kode berikut :
-```
-'auth'          => App\Filters\Auth::class;
-```
+Selannjutnya buka file **app/Config/Filters.php** dan ubah seperti berikut :
+
+![p](img/SS30.png)
 
 Selanjutnya buka file **app/Config/Routes** dan sesuaikan kodenya.
 
