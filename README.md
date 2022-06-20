@@ -722,6 +722,10 @@ Selanjutnya buka kembali CLI dan ketikan perintah berikut :
 php spark db:seed UserSeeder
 ```
 
+Buka kembali file `.env`, kemudian hapus tanda `#` pada `app.sessionX`
+
+![p](img/SS29.png)
+
 ## Uji Coba Login
 Selanjutnya buka url `http://localhost:8080/user/login` seperti berikut :
 Username = admin
