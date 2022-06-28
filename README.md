@@ -6,14 +6,19 @@
 
 ## Kelas : TI.20.A1
 
-## Matkul : Pemoggraman 
+## Matkul : Pemoggraman
 
 ---
+
 [Praktikum 11](#praktikum-11-php-framework-codeigniter)<br>
 [Praktikum 12](#praktikum-12-framework-lanjutan-crud)<br>
 [Praktikum 13](#praktikum-13-framework-lanjutan-modul-login)<br>
+[Praktikum 14](#praktikum-14-framework-pagination-dan-pencarian)<br>
+
 ---
+
 ---
+
 <br>
 # Praktikum 11 PHP Framework (Codeigniter)
 # Langkah-langkah Praktikum
@@ -298,12 +303,15 @@ Integer pharetra est nunc, nec pretium nunc pretium ac.</p>
 <br>Untuk memulai membuat database aplikasi CRUD sederhana, yang perlu disiapkan adalah database server menggunakan MySQL Server sudah dapat di jalankan melalui XAMPP.
 
 ## Membuat Database
+
 ```
 CREATE DATABASE lab_ci4;
 ```
+
 ![p](img/SS18.png)
 
 ## Membuat Tabel
+
 ```
 CREATE TABLE artikel (
  id INT(11) auto_increment,
@@ -315,11 +323,13 @@ CREATE TABLE artikel (
  PRIMARY KEY(id)
 );
 ```
+
 ![p](img/SS19.png)
 
 ## Konfigurasi Koneksi Database
 
 <br>Selanjutnya membuat konfigurasi untuk menghubungkan dengan database server. Konfigurasi dapat dilakukan dengan dua acara, yaitu pada file **app/config/database.php** atau menggunakan file **.env**. Pada praktikum ini kita gunakan konfigurasi pada file **.env**.
+
 ```php
 #-----------------------------------
 # DATABASE
@@ -328,7 +338,7 @@ CREATE TABLE artikel (
 database.default.hostname = localhost
 database.default.database = lab_ci4
 database.default.username = root
-database.default.password = 
+database.default.password =
 database.default.DBDriver = MySQLi
 database.default.DBPrefix =
 
@@ -337,6 +347,7 @@ database.default.DBPrefix =
 ## Membuat Controller
 
 <br>Buat controller baru dengan nama **Artikel.php** padadirektori **app/Controllers**
+
 ```php
 <?php
 namespace app\Controllers;
@@ -356,6 +367,7 @@ class Artikel extends BaseController
 ## Membuat View
 
 <br>Buat direktori baru dengan nama **artikel** pada direktori **app/view**. Dan buat file **index.php** kemudian isi dengan kode berikut :
+
 ```php
 <?= $this->include('template/header'); ?>
 
@@ -383,18 +395,20 @@ Selanjutnya buka browser dengan url `http://localhost:8080/artikel`
 ![p](img/SS20.png)
 
 belum ada data yang ditampilkan. Kemudian coba tambahkan beberapa data pada database agar dapat ditampilkan dataya.
+
 ```
-INSERT INTO artikel (judul, isi, slug) VALUE 
+INSERT INTO artikel (judul, isi, slug) VALUE
 ('Artikel pertama', 'Lorem Ipsum adalah contoh teks atau dummy dalam industri percetakan dan penataan huruf atau typesetting. Lorem Ipsum telah menjadi standar contoh teks sejak tahun 1500an, saat seorang tukang cetak yang tidak dikenal mengambil sebuah kumpulan teks dan mengacaknya untuk menjadi sebuah buku contoh huruf.', 'artikel-pertama'),
 ('Artikel kedua', 'Tidak seperti anggapan banyak orang, Lorem Ipsum bukanlah teks-teks yang diacak. Ia berakar dari sebuah naskah sastra latin klasik dari era 45 sebelum masehi, hingga bisa dipastikan usianya telah mencapai lebih dari 2000 tahun.', 'artikel-kedua');
- ```
+```
 
 Refresh browser untuk melihat hasilya
 ![p](img/SS21.png)
 
-
 ## Membuat Tampilan Detail Artikel
+
 <br>Tampilan pada saat judul berita di klik maka akan diarahkan ke halaman yang berbeda. Tambahkan fungsi baru pada **Controller/Artikel** dengan nama **view().**
+
 ```php
 public function view($slug)
     {
@@ -403,7 +417,7 @@ public function view($slug)
             'slug' => $slug
         ])->first();
         // Menampilkan error apabila data tidak ada.
-        if (!$artikel) 
+        if (!$artikel)
         {
             throw PageNotFoundException::forPageNotFound();
         }
@@ -413,7 +427,9 @@ public function view($slug)
 ```
 
 ## Membuat Routing Untuk Artikel Detail
+
 Buka kembali file **app/config/Routes.php**, kemudian tambahkan routing untuk artikel detail.
+
 ```php
 $routes->get('/artikel/(:any)', 'Artikel::view/$1');
 ```
@@ -422,9 +438,11 @@ Klik salah satu judul artikel untuk melihat hasilnya.
 ![p](img/SS22.png)
 
 ## Membuat Menu Admin
+
 <br>Menu admin adalah untuk proses CRUD data artikel. Buat method baru pada **Controller/Artikel** dengan nama **admin_index()**.
+
 ```php
-public function admin_index() 
+public function admin_index()
     {
         $title = 'Daftar Artikel';
         $model = new ArtikelModel();
@@ -434,6 +452,7 @@ public function admin_index()
 ```
 
 Selanjutnya buat view untuk tampilan admin pada **Views/artikel** dengan nama **admin_index.php**
+
 ```php
 <?= $this->include('template/admin_header'); ?>
 <table class="table table-bordered table-hover">
@@ -455,9 +474,9 @@ Selanjutnya buat view untuk tampilan admin pada **Views/artikel** dengan nama **
             </td>
             <td><?= $row['status']; ?></td>
             <td>
-                <a class="btn btn-primary p-1" href="<?= base_url('/admin/artikel/edit/' . 
+                <a class="btn btn-primary p-1" href="<?= base_url('/admin/artikel/edit/' .
                 $row['id']);?>">Ubah</a>
-                <a class="btn btn-danger p-1" onclick="return confirm('Yakin menghapus data?');" href="<?= base_url('/admin/artikel/delete/' . 
+                <a class="btn btn-danger p-1" onclick="return confirm('Yakin menghapus data?');" href="<?= base_url('/admin/artikel/delete/' .
                 $row['id']);?>">Hapus</a>
             </td>
         </tr>
@@ -479,7 +498,8 @@ Selanjutnya buat view untuk tampilan admin pada **Views/artikel** dengan nama **
 <?= $this->include('template/admin_footer'); ?>
 ```
 
-Tambahkan routing untuk menu admin 
+Tambahkan routing untuk menu admin
+
 ```php
 $routes->group('admin', function($routes) {
     $routes->get('artikel', 'Artikel::admin_index');
@@ -494,9 +514,11 @@ Untuk melihat menu admin dengan menggunakan url `http://localhost:8080/admin/art
 ![p](img/SS23.png)
 
 ## Menambahkan Data Artkel
+
 <br>Tambahkan fungsi/methode baru pada **Controlle/Artikel** dengan nama **add()**
+
 ```php
-public function add() 
+public function add()
     {
         // validasi data.
         $validation = \Config\Services::validation();
@@ -519,6 +541,7 @@ public function add()
 ```
 
 Kemudain buat view untuk form tambah data denga nama **form_add.php**
+
 ```php
 <?= $this->include('template/admin_header'); ?>
 <h2><?= $title; ?></h2>
@@ -536,9 +559,11 @@ Untuk melihat menu tambah dengan url `http://localhost:8080/admin/artikel/add`
 ![p](img/SS24.png)
 
 ## Mengubah Data
+
 <br>Tambahkan fungsi/methode baru pada **Controller/Admin** dengan nama **edit()**.
+
 ```php
-public function edit($id) 
+public function edit($id)
     {
         $artikel = new ArtikelModel();
 
@@ -555,7 +580,7 @@ public function edit($id)
             ]);
             return redirect('admin/artikel');
         }
-        
+
         // ambil data lama
         $data = $artikel->where('id', $id)->first();
         $title = "Edit Artikel";
@@ -568,9 +593,11 @@ Untuk mengakses menu edit bisa dengan mengklik tombol **Ubah** pada menu admin.
 ![p](img/SS25.png)
 
 ## Menghapus Data
-<br> Tambahkan fungsi/methode baru pada **Controller/Artikel dengan nama **delet()**
+
+<br> Tambahkan fungsi/methode baru pada **Controller/Artikel dengan nama **delet()\*\*
+
 ```php
-public function delete($id) 
+public function delete($id)
     {
         $artikel = new ArtikelModel();
         $artikel->delete($id);
@@ -589,21 +616,25 @@ Untuk menghapus artikel bisa dengan mengklik tombol **Hapus** pada menu admin.
 # Langkah - Langkah Praktikum
 
 ## Persiapan
+
 <br>Untuk membuat modul login, yang perlu disiapkan adalah database server menggunakan MySQL. Pastikan MySQL Server sudah dapat dijalankan melalui XAMPP
 
 ## Membuat Tabel : User Login
+
 ```php
 CREATE TABLE user (
   id INT(11) auto_increment,
   username VARCHAR(200) NOT NULL,
   useremail VARCHAR(200),
   userpassword VARCHAR(200),
-  PRIMARY KEY(id) 
+  PRIMARY KEY(id)
 );
 ```
 
 ## Membuat Model User
+
 <br>Selanjutnya membuat model user untuk memproses data login. Buat file baru pada direktori **app/Models** dengan nama **UserModel.php**
+
 ```php
 <?php
 namespace App\Models;
@@ -618,7 +649,9 @@ class UserModel extends Model
 ```
 
 ## Membuat Control User
+
 <br>Membuat Controller baru dengan nama User.php pada direktori **app/Controllers**. Kemudian tambahkan methode **index()** untuk menampilkan daftar user, dan methode login() untuk proses login.
+
 ```php
 <?php
 namespace App\Controllers;
@@ -680,44 +713,47 @@ class User extends BaseController
 ```
 
 ## Membuat View Login
+
 <br>Buat direktori baru dengannama **user** pada direktori **app/views**,kemudian buat file baru dengan nama **login.php**
+
 ```html
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>Login</title>
-	<link rel="stylesheet" href="<?= base_url('/style.css');?>">
-</head>
-<body>
+    <link rel="stylesheet" href="<?= base_url('/style.css');?>" />
+  </head>
+  <body>
     <?php if(session()->getFlashdata('flash_msg')):?>
-		<div class="alert alert-danger">
-			<?= session()->getFlashdata('flash_msg') ?>
-		</div>
-	<?php endif;?>
+    <div class="alert alert-danger"><?= session()->getFlashdata('flash_msg') ?></div>
+    <?php endif;?>
 
     <div class="login_box">
-		<p class="login_text">SignIn</p>
-		<form action="" method="post">
-			<label for="InputForEmail" class="form-label">Email address</label>
-			<input type="email" name="email" class="form_login" id="InputForEmail" value="<?= set_value('email') ?>" placeholder="Username or email ...">
+      <p class="login_text">SignIn</p>
+      <form action="" method="post">
+        <label for="InputForEmail" class="form-label">Email address</label>
+        <input type="email" name="email" class="form_login" id="InputForEmail" value="<?= set_value('email') ?>" placeholder="Username or email ..." />
 
-			<label for="InputForPassword" class="form-label">Password</label>
-			<input type="password" name="password" class="form_login" id="InputForPassword" placeholder="Password ...">
+        <label for="InputForPassword" class="form-label">Password</label>
+        <input type="password" name="password" class="form_login" id="InputForPassword" placeholder="Password ..." />
 
-			<button type="submit" class="btn btn_primary">Login</button>
-		</form>
-	</div>
-</body>
+        <button type="submit" class="btn btn_primary">Login</button>
+      </form>
+    </div>
+  </body>
 </html>
 ```
 
 ## Membuat Database Seeder
+
 <br>Database seeder digunakan untuk membuat data dummy. Untuk keperluan ujicoba modul login, kita perlu memasukkan data user dan password kedaalam database. Untuk itu buat database seeder untuk tabel user. Buka CLI, kemudian tulis perintah berikut:
+
 ```
 php spark make:seeder UserSeeder
 ```
 
 Selanjutnya buka kembali CLI dan ketikan perintah berikut :
+
 ```
 php spark db:seed UserSeeder
 ```
@@ -727,6 +763,7 @@ Buka kembali file `.env`, kemudian hapus tanda `#` pada `app.sessionX`
 ![p](img/SS29.png)
 
 ## Uji Coba Login
+
 Selanjutnya buka url `http://localhost:8080/user/login` seperti berikut :
 Username = admin
 Email = admin@email.com
@@ -735,7 +772,9 @@ Password = admin123
 ![p](img/SS27.png)
 
 ## Menambahkan Auth Fitur
+
 <br>Selanjutnya membuat filter untuk halaman admin. Buat file baru dengan nama **Auth.php** pada direktori **app/Filters**.
+
 ```php
 <?php namespace App\Filters;
 
@@ -771,17 +810,136 @@ Selanjutnya buka file **app/Config/Routes** dan sesuaikan kodenya.
 ![p](img/SS28.png)
 
 ## Percobaan Akses Menu Admin
+
 <br>Buka url dengan alamat `http://localhost:8080/admin/artikel` ketika alamat tersebut diakses maka, akan dimuculkan halaman login.
 
 ![p](img/SS31.png)
 
 ## Fungsi Logout
+
 <br>Tambahkan methode logout pada **Controller/User** seperti berikut :
+
 ```php
-public function logout() 
+public function logout()
     {
         session()->destroy();
         return redirect()->to('/user/login');
     }
 ```
 
+# Praktikum 14 Framework Lanjutan Pagination dan Pencarian
+
+# Langkah - Langkah Praktikum
+
+## Membuat Pagination
+
+Untuk Membuat pagination, buka kembali Controller Artikel, kemudian modifikasi kode pada method admid_index seperti berikut.<br>
+
+```
+    public function admin_index()
+    {
+        $title = 'Daftar Artikel';
+        $model = new ArtikelModel();
+        $data = [
+                'title' => $title,
+                'artikel' => $model->paginate(10), #data dibatasi 10 record per
+halaman
+        'pager' => $model->pager,
+    ];
+    return view('artikel/admin_index', $data);
+}
+```
+
+Kemudian buka file view/artikel/admin_index.php dan tambahkan kode berikut dibawah deklarasi tabel data.<br>
+
+```
+<?= $pager->links(); ?>
+```
+
+selanjutnya buka kembali menu daftar artikel, tambahkan data lagi untuk melihat hasilnya<br>
+![p](img/SS32.png)
+
+## Membuat pencarian
+
+untuk membuat pencarian data, buka kembali Controller aratikel, pada method admin_index ubah kodenya seperti berikut<br>
+
+```
+    public function admin_index()
+ {
+        $title = 'Daftar Artikel';
+        $q = $this->request->getVar('q') ?? '';
+        $model = new ArtikelModel();
+        $data = [
+            'title' => $title,
+            'q' => $q,
+            'artikel' => $model->like('judul', $q)->paginate(10), # data
+dibatasi 10 record per halaman
+            'pager' => $model->pager,
+        ];
+        return view('artikel/admin_index', $data);
+ }
+```
+
+kemudian buka kembali file views/artikel/admin_index.php dan tambahkan form pencarian sebelum deklarasi tabel seperti berikut:<br>
+
+```
+<form method="get" class="form-search">
+    <input type="text" name="q" value="<?= $q; ?>" placeholder="Cari data">
+    <input type="submit" value="Cari" class="btn btn-primary">
+</form>
+```
+
+dan pada link pager ubah seperti berikut.<br>
+
+```
+<?= $pager->only(['q'])->links(); ?>
+```
+
+Refresh pada browser untuk melihat hasil.<br>
+![p](img/SS33.png)
+
+## Upload gambar
+
+Menambahkan fungsi unggah gambar pada tambah artikel. Buka kembali Controller Artikel, sesuaikan kode pada method add seperti berikut:<br>
+
+```
+    public function add()
+    {
+        // validasi data.
+        $validation = \Config\Services::validation();
+        $validation->setRules(['judul' => 'required']);
+        $isDataValid = $validation->withRequest($this->request)->run();
+    if ($isDataValid)
+    {
+        $file = $this->request->getFile('gambar');
+        $file->move(ROOTPATH . 'public/gambar');
+        $artikel = new ArtikelModel();
+        $artikel->insert([
+            'judul' => $this->request->getPost('judul'),
+            'isi' => $this->request->getPost('isi'),
+            'slug' => url_title($this->request->getPost('judul')),
+            'gambar' => $file->getName(),
+        ]);
+        return redirect('admin/artikel');
+    }
+    $title = "Tambah Artikel";
+    return view('artikel/form_add', compact('title'));
+ }
+```
+
+Kemudian pada file views/artikel/form_add.php tambahkan field input file seperti berikut.<br>
+
+```
+    <p>
+        <input type="file" name="gambar">
+    </p>
+```
+
+Dan sesuaikan tag form dengan menambahkan ecrypt type seperti berikut.<br>
+
+```
+<form action="" method="post" enctype="multipart/form-data">
+```
+
+refresh pada browser untuk lihat hasilnya.<br>
+![p](img/SS34.png)
